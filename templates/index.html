@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+{% block title %}Aitinerary Planner{% endblock %}
+{% block content %}
+<div class="text-center mb-5">
+    <h1>Aitinerary Planner</h1>
+    <p class="lead">Select your travel filters and get a personalized itinerary with hotel, flight, and car rental suggestions.</p>
+</div>
+
+<div class="card mb-4 shadow-sm">
+    <div class="card-body">
+        <form method="post">
+            <div class="row gy-3">
+                <div class="col-md-6">
+                    <label class="form-label">Destination</label>
+                    <input type="text" class="form-control" name="destination" placeholder="e.g. Paris" required />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Start date</label>
+                    <input type="date" class="form-control" name="start_date" required />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">End date</label>
+                    <input type="date" class="form-control" name="end_date" required />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label"># of Guests</label>
+                    <input type="number" class="form-control" name="travelers" min="1" value="1" />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Overall budget per person</label>
+                    <input type="number" class="form-control" name="budget_per_person" min="0" value="1500" required />
+                </div>
+            </div>
+
+            <div class="mt-4 p-4 bg-light rounded">
+                <h4 class="h5 mb-3">Flights</h4>
+                <div class="row gy-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Preferred Airlines</label>
+                        <input type="text" class="form-control" name="preferred_airlines" placeholder="e.g. SkyLine, AeroExpress" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Landing/Takeoff time range</label>
+                        <input type="text" class="form-control" name="flight_time_range" placeholder="e.g. 08:00-14:00" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Flight budget</label>
+                        <input type="number" class="form-control" name="flight_budget" min="0" placeholder="USD" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 p-4 bg-light rounded">
+                <h4 class="h5 mb-3">Hotels</h4>
+                <div class="row gy-3">
+                    <div class="col-md-3">
+                        <label class="form-label">Star rating</label>
+                        <input type="number" class="form-control" name="hotel_star" min="1" max="5" value="3" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label"># of rooms</label>
+                        <input type="number" class="form-control" name="hotel_rooms" min="1" value="1" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Price budget per night</label>
+                        <input type="number" class="form-control" name="hotel_budget" min="0" placeholder="USD" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 p-4 bg-light rounded">
+                <h4 class="h5 mb-3">Rental car</h4>
+                <div class="row gy-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Type</label>
+                        <select class="form-select" name="car_type">
+                            {% for option in filters.car_types %}
+                            <option value="{{ option }}">{{ option }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Price budget per day</label>
+                        <input type="number" class="form-control" name="car_budget" min="0" placeholder="USD" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Intensity</label>
+                        <select class="form-select" name="intensity">
+                            {% for option in filters.intensity_options %}
+                            <option value="{{ option }}">{{ option }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 text-end">
+                <button type="submit" class="btn btn-primary btn-lg">Generate Itinerary</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% if itinerary %}
+<div class="row gy-4">
+    <div class="col-lg-8">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h2 class="h5 mb-3">Curated Itinerary Summary</h2>
+                <dl class="row">
+                    <dt class="col-sm-4">Destination</dt>
+                    <dd class="col-sm-8">{{ itinerary.destination }}</dd>
+                    <dt class="col-sm-4">Trip dates</dt>
+                    <dd class="col-sm-8">{{ itinerary.dates }}</dd>
+                    <dt class="col-sm-4"># Guests</dt>
+                    <dd class="col-sm-8">{{ itinerary.travelers }}</dd>
+                    <dt class="col-sm-4">Nights</dt>
+                    <dd class="col-sm-8">{{ itinerary.nights }}</dd>
+                    <dt class="col-sm-4">Budget per person</dt>
+                    <dd class="col-sm-8">${{ itinerary.budget_per_person }}</dd>
+                    <dt class="col-sm-4">Total budget</dt>
+                    <dd class="col-sm-8">${{ itinerary.total_budget }}</dd>
+                    <dt class="col-sm-4">Budget status</dt>
+                    <dd class="col-sm-8">{{ itinerary.totals.budget_match }}</dd>
+                </dl>
+
+                <div class="row gy-3 mt-4">
+                    <div class="col-md-6">
+                        <div class="border rounded p-3 h-100">
+                            <h4 class="h6">Flight recommendation</h4>
+                            {% if itinerary.flight %}
+                            <p><strong>{{ itinerary.flight.airline }}</strong></p>
+                            <p>{{ itinerary.flight.route }} • {{ itinerary.flight.time }} • ${{ itinerary.flight.price }}</p>
+                            <a href="{{ itinerary.flight.booking_url }}" class="btn btn-outline-primary btn-sm" target="_blank">View flight</a>
+                            {% else %}
+                            <p>No flight option matched your filters.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="border rounded p-3 h-100">
+                            <h4 class="h6">Hotel recommendation</h4>
+                            {% if itinerary.hotel %}
+                            <p><strong>{{ itinerary.hotel.name }}</strong></p>
+                            <p>{{ itinerary.hotel.type }} • {{ itinerary.hotel.rating }}★ • ${{ itinerary.hotel.price_per_night }} / night</p>
+                            <a href="{{ itinerary.hotel.booking_url }}" class="btn btn-outline-primary btn-sm" target="_blank">View hotel</a>
+                            {% else %}
+                            <p>No hotel option matched your filters.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row gy-3 mt-3">
+                    <div class="col-md-6">
+                        <div class="border rounded p-3 h-100">
+                            <h4 class="h6">Car rental recommendation</h4>
+                            {% if itinerary.car %}
+                            <p><strong>{{ itinerary.car.name }}</strong></p>
+                            <p>{{ itinerary.car.provider }} • ${{ itinerary.car.daily_price }} / day</p>
+                            <a href="{{ itinerary.car.booking_url }}" class="btn btn-outline-primary btn-sm" target="_blank">View car rental</a>
+                            {% else %}
+                            <p>No car rental option matched your filters.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="border rounded p-3 h-100">
+                            <h4 class="h6">Preferences captured</h4>
+                            <p>Airlines: {{ itinerary.preferences.preferred_airlines or 'Any' }}</p>
+                            <p>Flight window: {{ itinerary.preferences.flight_time_range or 'Any' }}</p>
+                            <p>Hotel rooms: {{ itinerary.preferences.hotel_rooms }}</p>
+                            <p>Trip intensity: {{ itinerary.preferences.intensity }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h3 class="h6 mb-3">Top activities</h3>
+                <ul class="list-group">
+                    {% for activity in itinerary.activities %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ activity.name }}
+                        <span class="badge bg-secondary">${{ activity.price }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <div class="mt-4 p-3 bg-light rounded">
+                    <p class="mb-2"><strong>Cost breakdown</strong></p>
+                    <p>Flight: ${{ itinerary.totals.flight }}</p>
+                    <p>Hotel: ${{ itinerary.totals.hotel }}</p>
+                    <p>Car: ${{ itinerary.totals.car }}</p>
+                    <p>Activities: ${{ itinerary.totals.activities }}</p>
+                    <p class="mb-0"><strong>Estimated total cost: ${{ itinerary.totals.grand_total }}</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

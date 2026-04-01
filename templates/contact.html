@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Contact Us - AItinerary{% endblock %}
+{% block content %}
+<div class="text-center mb-4">
+    <h1 class="h2">Contact Us</h1>
+    <p class="text-muted">Reach out with questions, partnership inquiries, or feedback on the itinerary planner.</p>
+</div>
+<div class="row gy-4">
+    <div class="col-lg-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h3 class="h5">Contact details</h3>
+                <p>Email id: <a href="mailto:hello@aitinerary.example">hello@aitinerary.example</a></p>
+                <p>Phone number: +1 (555) 123-4567</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h3 class="h5">Send us a message</h3>
+                {% if message_sent %}
+                <div class="alert alert-success" role="alert">
+                    Thanks for your message! We will reply soon.
+                </div>
+                {% endif %}
+                <form method="post">
+                    <div class="mb-3">
+                        <label class="form-label">Your email</label>
+                        <input type="email" class="form-control" name="email" placeholder="you@example.com" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Message</label>
+                        <textarea class="form-control" name="message" rows="4" placeholder="Tell us how we can help" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

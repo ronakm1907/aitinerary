@@ -1,0 +1,28 @@
+:root {
+    color-scheme: light;
+}
+body {
+    background: #f4f7fb;
+    color: #1f2937;
+}
+.navbar {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+.card {
+    border: 1px solid #e5e7eb;
+}
+.btn-primary {
+    background-color: #2563eb;
+    border-color: #2563eb;
+}
+.btn-primary:hover {
+    background-color: #1d4ed8;
+    border-color: #1d4ed8;
+}
+.alert-info {
+    background-color: #e0f2fe;
+    border-color: #bae6fd;
+}
+footer {
+    background: #ffffff;
+}
