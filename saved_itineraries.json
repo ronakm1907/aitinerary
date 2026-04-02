@@ -1,0 +1,182 @@
+[
+  {
+    "id": "3df34fcf-9aee-4124-b15e-e49c38856182",
+    "created_at": "2026-04-01T19:51:02.555517",
+    "destination": "Paris",
+    "dates": "2026-04-01 to 2026-04-04",
+    "travelers": 1,
+    "total_budget": 1500,
+    "grand_total": 1234,
+    "intensity": "Moderate",
+    "data": {
+      "budget_per_person": 1500,
+      "car": {
+        "booking_url": "https://example.com/car/standard-sedan",
+        "daily_price": 38,
+        "name": "Standard Sedan",
+        "provider": "FastRental",
+        "type": "Sedan"
+      },
+      "daily_plan": [
+        {
+          "activities": [
+            "Check into your hotel",
+            "Take a walking tour of the historic district",
+            "Enjoy a welcome dinner at a local restaurant"
+          ],
+          "day_number": 1,
+          "estimated_cost": 120,
+          "guidelines": "After arriving, take some time to settle in, exchange currency if needed, and walk the nearby streets to get familiar with local landmarks.",
+          "title": "Arrive and Explore the Old Town"
+        },
+        {
+          "activities": [
+            "Visit the museum district",
+            "Sample regional specialties at a market",
+            "Attend an evening cultural show"
+          ],
+          "day_number": 2,
+          "estimated_cost": 150,
+          "guidelines": "Start early at the museums to avoid lines, and book dinner reservations for popular local eateries.",
+          "title": "Cultural Highlights and Local Cuisine"
+        },
+        {
+          "activities": [
+            "Take a nature hike",
+            "Enjoy a scenic viewpoint",
+            "Relax with a casual dinner"
+          ],
+          "day_number": 3,
+          "estimated_cost": 110,
+          "guidelines": "Wear comfortable shoes for the hike, carry water, and plan transportation back to the city in advance.",
+          "title": "Scenic Adventure"
+        }
+      ],
+      "dates": "2026-04-01 to 2026-04-04",
+      "destination": "Paris",
+      "flight": {
+        "airline": "SkyLine Airways",
+        "booking_url": "https://example.com/flight/skyline",
+        "price": 320,
+        "route": "Paris inbound",
+        "time": "08:00 - 12:00"
+      },
+      "hotel": {
+        "booking_url": "https://example.com/hotel/city-view-suites",
+        "name": "City View Suites",
+        "price_per_night": 140,
+        "rating": 4,
+        "rooms_available": 3,
+        "type": "Hotel"
+      },
+      "nights": 3,
+      "preferences": {
+        "flight_time_range": "",
+        "hotel_rooms": 1,
+        "hotel_star": 3,
+        "intensity": "Moderate",
+        "preferred_airlines": ""
+      },
+      "total_budget": 1500,
+      "totals": {
+        "activities": 380,
+        "budget_match": "Within budget",
+        "car": 114,
+        "flight": 320,
+        "grand_total": 1234,
+        "hotel": 420
+      },
+      "travelers": 1
+    }
+  },
+  {
+    "id": "a4eb1b6c-9c87-47ea-8e26-a9b2d6a3eb76",
+    "created_at": "2026-04-01T19:56:29.245215",
+    "destination": "Hawaii",
+    "dates": "2026-04-01 to 2026-04-04",
+    "travelers": 1,
+    "total_budget": 1500,
+    "grand_total": 1214,
+    "intensity": "Relaxed",
+    "data": {
+      "budget_per_person": 1500,
+      "car": {
+        "booking_url": "https://example.com/car/standard-sedan",
+        "daily_price": 38,
+        "name": "Standard Sedan",
+        "provider": "FastRental",
+        "type": "Sedan"
+      },
+      "daily_plan": [
+        {
+          "activities": [
+            "Check into your hotel",
+            "Take a walking tour of the historic district",
+            "Enjoy a welcome dinner at a local restaurant"
+          ],
+          "day_number": 1,
+          "estimated_cost": 120,
+          "guidelines": "After arriving, take some time to settle in, exchange currency if needed, and walk the nearby streets to get familiar with local landmarks.",
+          "title": "Arrive and Explore the Old Town"
+        },
+        {
+          "activities": [
+            "Stroll through a botanical garden",
+            "Enjoy a leisurely brunch",
+            "Have a relaxing dinner with views"
+          ],
+          "day_number": 2,
+          "estimated_cost": 130,
+          "guidelines": "Plan for a slow morning, and leave plenty of time to relax between activities.",
+          "title": "Cultural Highlights and Local Cuisine"
+        },
+        {
+          "activities": [
+            "Take a nature hike",
+            "Enjoy a scenic viewpoint",
+            "Relax with a casual dinner"
+          ],
+          "day_number": 3,
+          "estimated_cost": 110,
+          "guidelines": "Wear comfortable shoes for the hike, carry water, and plan transportation back to the city in advance.",
+          "title": "Scenic Adventure"
+        }
+      ],
+      "dates": "2026-04-01 to 2026-04-04",
+      "destination": "Hawaii",
+      "flight": {
+        "airline": "SkyLine Airways",
+        "booking_url": "https://example.com/flight/skyline",
+        "price": 320,
+        "route": "Hawaii inbound",
+        "time": "08:00 - 12:00"
+      },
+      "hotel": {
+        "booking_url": "https://example.com/hotel/city-view-suites",
+        "name": "City View Suites",
+        "price_per_night": 140,
+        "rating": 4,
+        "rooms_available": 3,
+        "type": "Hotel"
+      },
+      "nights": 3,
+      "preferences": {
+        "flight_time_range": "",
+        "hotel_rooms": 1,
+        "hotel_star": 3,
+        "intensity": "Relaxed",
+        "preferred_airlines": ""
+      },
+      "total_budget": 1500,
+      "totals": {
+        "activities": 360,
+        "budget_match": "Within budget",
+        "car": 114,
+        "flight": 320,
+        "grand_total": 1214,
+        "hotel": 420
+      },
+      "travelers": 1
+    }
+  }
+]

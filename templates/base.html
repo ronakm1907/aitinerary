@@ -19,11 +19,23 @@
                     <li class="nav-item">
                         <a class="nav-link {% if active_page == 'home' %}active{% endif %}" href="{{ url_for('index') }}">Home</a>
                     </li>
+                    {% if logged_in %}
+                    <li class="nav-item d-flex align-items-center">
+                        <span class="navbar-text text-white me-3">Hello, {{ current_user }}</span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('signout') }}">Sign out</a>
+                    </li>
+                    {% else %}
                     <li class="nav-item">
                         <a class="nav-link {% if active_page == 'signin' %}active{% endif %}" href="{{ url_for('signin') }}">Sign in/Sign up</a>
                     </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link {% if active_page == 'partners' %}active{% endif %}" href="{{ url_for('partners') }}">Partners</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if active_page == 'saved' %}active{% endif %}" href="{{ url_for('saved') }}">Saved</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if active_page == 'about' %}active{% endif %}" href="{{ url_for('about') }}">About Us</a>
